@@ -37,12 +37,18 @@ This software is distributed under the MIT license. Please read [LICENSE](LICENS
 - PHP 8.0.0 or higher
 - fully supported OS: Debian, Rasbian, Ubuntu, Arch, Manjaro
 - partially supported: other Linux, Mac OS, Windows
-- other requirements documented in [Configuration.Default.jsonc](Configuration.Default.jsonc)
+- complete requirements documented in [Configuration.Default.jsonc](Configuration.Default.jsonc)
 
 ## Installing
-
+download latest [Release](https://github.com/robertsaupe/phpbat/releases)
+```
+$ tar xvz -f x.x.x.tar.gz
+$ rm x.x.x.tar.gz
+```
 
 ## Getting started
+copy [Configuration.Default.jsonc](Configuration.Default.jsonc) to Configuration.jsonc and editing it.
+
 using php-cli
 ```
 $ php phpBAT.php
