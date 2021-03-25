@@ -68,7 +68,7 @@ try {
             $zip->addFile($file->path, 'phpbat/' . $cleanfile);
             $gz->addFile($file->path, 'phpbat/' . $cleanfile);
         }
-    }, true, null, array('.git', '.gitignore', '.zip', '.log', '.tar', '.gz', '.enc', '.sql', 'builds/', 'buildRelease.php', 'Configuration.jsonc', 'phpBAT.Debug.php', '.php', '.jsonc'));
+    }, true, null, array('.git', '.gitignore', '.zip', '.log', '.tar', '.gz', '.enc', '.sql', 'builds/', 'buildRelease.php', 'Configuration.jsonc', 'phpBAT.Debug.php'));
 
     $zip->close();
     print('finished: ' . APP_BUILD_FILEZIP . PHP_EOL);
