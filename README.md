@@ -2,6 +2,16 @@
 
 # phpBAT - a PHP based Backup &amp; Admin Tool
 
+[Supporting](https://github.com/robertsaupe/phpbat#supporting) |
+[Features](https://github.com/robertsaupe/phpbat#features) |
+[License](https://github.com/robertsaupe/phpbat#license) |
+[Requirements](https://github.com/robertsaupe/phpbat#requirements) |
+[Installing](https://github.com/robertsaupe/phpbat#installing) |
+[Getting started](https://github.com/robertsaupe/phpbat#getting-started) |
+[Credits](https://github.com/robertsaupe/phpbat#credits) |
+[Changelog](https://github.com/robertsaupe/phpbat#changelog) |
+[History](https://github.com/robertsaupe/phpbat#history)
+
 ## Supporting
 https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ
 
@@ -32,6 +42,27 @@ This software is distributed under the MIT license. Please read [LICENSE](LICENS
 ## Installing
 
 ## Getting started
+using php-cli
+```
+$ php phpBAT.php
+```
+
+using cron
+```
+$ crontab -e
+
+0 2 * * * php /root/phpbat/phpBAT.php -cron
+```
+
+using php-cli decrypt all encrypt backups
+```
+$ php phpBAT.php -d
+```
+
+using php-cli decrypt a encrypt backup-file
+```
+$ php phpBAT.php -df file.enc
+```
 
 ## Credits
 - https://github.com/splitbrain/php-archive
