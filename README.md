@@ -37,7 +37,7 @@ This software is distributed under the MIT license. Please read [LICENSE](LICENS
 - PHP 8.0.0 or higher
 - fully supported OS: Debian, Rasbian, Ubuntu, Arch, Manjaro
 - partially supported: other Linux, Mac OS, Windows
-- other requirements documented in [Configuration](Configuration.Default.jsonc)
+- other requirements documented in [Configuration.Default.jsonc](Configuration.Default.jsonc)
 
 ## Installing
 
@@ -54,12 +54,12 @@ $ crontab -e
 0 2 * * * php /root/phpbat/phpBAT.php -cron
 ```
 
-using php-cli decrypt all encrypt backups
+using php-cli decrypt all encrypted backups
 ```
 $ php phpBAT.php -d
 ```
 
-using php-cli decrypt a encrypt backup-file
+using php-cli decrypt a encrypted backup-file
 ```
 $ php phpBAT.php -df file.enc
 ```
