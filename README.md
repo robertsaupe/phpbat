@@ -1,4 +1,4 @@
-![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.github/phpbat.png)
+![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.github/phpbat_mini.png)
 
 # phpBAT - a PHP based Backup &amp; Admin Tool
 
