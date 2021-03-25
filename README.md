@@ -41,25 +41,26 @@ This software is distributed under the MIT license. Please read [LICENSE](LICENS
 
 ## Installing
 
+
 ## Getting started
 using php-cli
 ```
 $ php phpBAT.php
 ```
 
-using cron
+using cron: daily
 ```
 $ crontab -e
 
 0 2 * * * php /root/phpbat/phpBAT.php -cron
 ```
 
-using php-cli decrypt all encrypted backups
+using php-cli: decrypt all encrypted backups
 ```
 $ php phpBAT.php -d
 ```
 
-using php-cli decrypt a encrypted backup-file
+using php-cli: decrypt a encrypted backup-file
 ```
 $ php phpBAT.php -df file.enc
 ```
