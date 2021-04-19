@@ -13,6 +13,7 @@
 [History](https://github.com/robertsaupe/phpbat#history)
 
 ## Supporting
+https://www.patreon.com/robertsaupe
 https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ
 
 ## Features
