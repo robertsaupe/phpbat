@@ -13,8 +13,8 @@
 [History](https://github.com/robertsaupe/phpbat#history)
 
 ## Supporting
-https://www.patreon.com/robertsaupe
-https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ
+[Patreon](https://www.patreon.com/robertsaupe) 
+[PayPal](https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ)
 
 ## Features
 - full server backups
