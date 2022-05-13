@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+if (PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg') {
+    echo 'Warning: phpBAT may only be invoked from a command line', PHP_EOL;
+}
+
+if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get')) {
+    date_default_timezone_set(@date_default_timezone_get());
+}
+
+error_reporting(-1);
+if (function_exists('ini_set')) {
+    @ini_set('display_errors', 1);
+}
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use phpbat\Console\Application;
+
+$application = new Application();
+
+$application->add(new \phpbat\Command\Hello());
+
+// if ('phar:' === substr(__FILE__, 0, 5)) {
+//     $application->add(new \phpbat\Command\SelfUpdate());
+// }
+
+$application->run();

@@ -1,8 +1,2 @@
-/Configuration.jsonc
-/builds/
-/Library/RobertSaupe/Helper/
-/Library/Ifsnop/
-/Library/ParagonIE/
-/Library/PHPMailer/
-/Library/phpseclib3/
-/Library/splitbrain/
+/composer.lock
+/vendor/

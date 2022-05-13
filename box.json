@@ -1,0 +1,57 @@
+{
+    "banner": [
+        "This file is part of the phpBAT project.",
+        "",
+        "https://github.com/robertsaupe/phpbat",
+        "",
+        "Copyright (c) 2018 Robert Saupe <mail@robertsaupe.de> (https://robertsaupe.de)",
+        "",
+        "This source file is subject to the MIT license that is bundled",
+        "with this source code in the file LICENSE."
+    ],
+
+    "chmod": "0755",
+
+    "finder": [
+        {
+            "notName": "/LICENSE|.*\\.md|.*\\.dist|Makefile|composer\\.json|composer\\.lock/",
+            "exclude": [
+                "doc",
+                "test",
+                "test_old",
+                "tests",
+                "Tests",
+                "vendor-bin"
+            ],
+            "in": "vendor"
+        }
+    ],
+
+    "directories": ["bin", "src"],
+
+    "files": [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
+
+    "compression": "GZ",
+
+    "replacements": {
+        "version.major": 3,
+        "version.minor": 0,
+        "version.patch": 0,
+        "version.release": "develop"
+    },
+
+    "datetime-format": "Y-m-d",
+    "datetime": "release-date",
+    "git": "git",
+    "git-commit": "git.commit",
+    "git-commit-short": "git.commit.short",
+    "git-tag": "git.tag",
+    "git-version": "git.version",
+
+    "main": "bin/phpbat",
+    "output": "build/phpbat.phar"
+}

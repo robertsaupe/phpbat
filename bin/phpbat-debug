@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+\set_error_handler(static function ($errno, $errstr): void {
+    \var_dump($errno, $errstr);
+}, \E_ALL);
+
+require __DIR__ . '/phpbat';
+?>

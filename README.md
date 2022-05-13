@@ -1,3 +1,20 @@
+<h1>
+
+```diff
+-! WORK IN PROGRESS !-
+
+!- The development of the phar version is at a very early stage.
+!- Neither tests nor feedback are currently useful.
+!- As soon as the situation changes, I will inform you.
+
+#=- ... -=#
+
+```
+
+</h1>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
 ![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.github/phpbat_mini.png)
 
 # phpBAT - a PHP based Backup &amp; Admin Tool
