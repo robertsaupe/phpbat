@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
@@ -12,7 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-define("APP_DEBUG", true);
+namespace robertsaupe\phpbat;
 
-require __DIR__ . '/phpbat';
+/**
+ * @private
+ */
+trait NotInstantiable {
+    
+    private function __construct() {
+    }
+}
+
 ?>

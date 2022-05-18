@@ -49,7 +49,7 @@
     },
     "autoload": {
         "psr-4": { 
-            "phpbat\\": "src/"
+            "robertsaupe\\phpbat\\": "src/"
         }
     },
     "config": {
