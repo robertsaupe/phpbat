@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Settings used to backup and administrate a server or webspace using phpBAT.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "test"
+    ],
+    "properties":{
+        "test": {
+            "description": "test the configuration and validation",
+            "type": "string"
+        }
+    }
+}

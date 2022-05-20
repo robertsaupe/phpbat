@@ -89,6 +89,10 @@ class Application extends BaseApplication {
                 new Command\Hello(),
                 new Command\Color(),
                 new Command\Error(),
+                new Command\Configuration(),
+                new Command\ConfigurationShow(),
+                new Command\ConfigurationValidate(),
+                //@TODO: new Command\ConfigurationCreate(),
             ],
             //('phar:' === substr(__FILE__, 0, 5)) ? [new Command\SelfUpdate()] : []
         );

@@ -25,7 +25,7 @@
         }
     ],
 
-    "directories": ["bin", "src"],
+    "directories": ["bin", "src", "res"],
 
     "files": [
         "README.md",

@@ -14,11 +14,11 @@ declare(strict_types=1);
 
 namespace robertsaupe\phpbat;
 
-use RuntimeException;
 use function file_exists;
 use function in_array;
 use const PHP_EOL;
 use const PHP_SAPI;
+use RuntimeException;
 use robertsaupe\phpbat\Console\Application;
 
 //check php-cli
@@ -68,6 +68,7 @@ if (APP_DEBUG === true) {
 You need to set up the project dependencies using Composer:
     $ composer install
 You can learn all about Composer on https://getcomposer.org/.
+
 ERROR
     );
 
