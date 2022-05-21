@@ -35,6 +35,10 @@
 
     "compression": "GZ",
 
+    "compactors": [
+        "KevinGH\\Box\\Compactor\\Php"
+    ],
+
     "datetime": "release-date",
     "git": "git",
     "git-commit": "git.commit",

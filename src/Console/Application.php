@@ -36,7 +36,7 @@ class Application extends BaseApplication {
     public const VERSION_MAJOR = 3;
     public const VERSION_MINOR = 0;
     public const VERSION_PATCH = 0;
-    public const VERSION_RELEASE = "dev";//stable, beta, alpha, dev
+    public const VERSION_RELEASE = "alpha";//stable|beta|b|RC|alpha|a|patch|pl|p
     public const VERSION_CORE = self::VERSION_MAJOR . '.' . self::VERSION_MINOR . '.' . self::VERSION_PATCH;
     public const VERSION = self::VERSION_CORE . '-' . self::VERSION_RELEASE;
 
@@ -94,7 +94,7 @@ class Application extends BaseApplication {
                 new Command\ConfigurationValidate(),
                 new Command\ConfigurationCreate(),
             ],
-            //('phar:' === substr(__FILE__, 0, 5)) ? [new Command\SelfUpdate()] : []
+            ('phar:' === substr(__FILE__, 0, 5)) ? [new Command\SelfUpdate()] : []
         );
         return $commands;
     }
