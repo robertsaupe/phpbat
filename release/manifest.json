@@ -1,0 +1,30 @@
+{
+    "3.0.0-alpha": {
+        "version": "3.0.0-alpha",
+        "url": "https:\/\/robertsaupe.github.io\/phpbat\/release\/3.0.0-alpha\/phpbat.phar",
+        "sha1": "2b398219412a33dfa1745cac14df34dd646fb7a6",
+        "sha256": "7a609687d2fca5a25f6961bc2bfb6a9b5775b09f03018acd15d6cae1dd8d0407",
+        "sha512": "1d73954f4144116c95cedfa7636cebc6ddc4e5ab8246da006c2539260ae7c744032f0fb51d0e8af10ee5f1f1c6d785af4626e56b25cc7e1ff9f6f9301466152e"
+    },
+    "latest-unstable": {
+        "version": "3.0.0-alpha",
+        "url": "https:\/\/robertsaupe.github.io\/phpbat\/release\/latest-unstable\/phpbat.phar",
+        "sha1": "2b398219412a33dfa1745cac14df34dd646fb7a6",
+        "sha256": "7a609687d2fca5a25f6961bc2bfb6a9b5775b09f03018acd15d6cae1dd8d0407",
+        "sha512": "1d73954f4144116c95cedfa7636cebc6ddc4e5ab8246da006c2539260ae7c744032f0fb51d0e8af10ee5f1f1c6d785af4626e56b25cc7e1ff9f6f9301466152e"
+    },
+    "unstable": {
+        "version": "3.0.0-alpha",
+        "url": "https:\/\/robertsaupe.github.io\/phpbat\/release\/unstable\/phpbat.phar",
+        "sha1": "2b398219412a33dfa1745cac14df34dd646fb7a6",
+        "sha256": "7a609687d2fca5a25f6961bc2bfb6a9b5775b09f03018acd15d6cae1dd8d0407",
+        "sha512": "1d73954f4144116c95cedfa7636cebc6ddc4e5ab8246da006c2539260ae7c744032f0fb51d0e8af10ee5f1f1c6d785af4626e56b25cc7e1ff9f6f9301466152e"
+    },
+    "latest": {
+        "version": "3.0.0-alpha",
+        "url": "https:\/\/robertsaupe.github.io\/phpbat\/release\/latest\/phpbat.phar",
+        "sha1": "2b398219412a33dfa1745cac14df34dd646fb7a6",
+        "sha256": "7a609687d2fca5a25f6961bc2bfb6a9b5775b09f03018acd15d6cae1dd8d0407",
+        "sha512": "1d73954f4144116c95cedfa7636cebc6ddc4e5ab8246da006c2539260ae7c744032f0fb51d0e8af10ee5f1f1c6d785af4626e56b25cc7e1ff9f6f9301466152e"
+    }
+}
