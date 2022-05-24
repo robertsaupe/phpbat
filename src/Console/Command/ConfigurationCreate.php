@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace robertsaupe\phpbat\Console\Command;
 
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use robertsaupe\phpbat\Console\IO;
 
 class ConfigurationCreate extends ConfigurationBaseCommand {
@@ -58,19 +59,14 @@ class ConfigurationCreate extends ConfigurationBaseCommand {
             return 0;
         }
 
-        if(!@copy(self::DEFAULT_FILE, $configurationFile)) {
-            throw new IOException(
-                sprintf(
-                    'Failed to create file "%s": %s.',
-                    $configurationFile,
-                    error_get_last()['message'],
-                ),
-                0,
-                null,
-                $configurationFile,
-            );
-        } else {
-            $io->success(sprintf('Configuration file "%s" created.', $configurationFile));
+        $filesystem = new Filesystem();
+
+        try{
+            $filesystem->copy(self::DEFAULT_FILE, $configurationFile, true);
+            $io->success(sprintf('Configuration file created at "%s"', $configurationFile));
+        } catch (IOExceptionInterface $exception) {
+            print_r($exception);
+            $io->error($exception->getMessage());
         }
 
         return 0;
