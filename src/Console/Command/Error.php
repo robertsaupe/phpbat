@@ -15,7 +15,6 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use Throwable;
 use robertsaupe\phpbat\Console\IO;
-use const APP_DEBUG;
 
 class Error extends BaseCommand {
 
@@ -32,10 +31,6 @@ class Error extends BaseCommand {
             $var = 5 / 0;
             $io->writeln('$var: ' . $var);
         } catch (Throwable $throwable) {
-            
-            if (APP_DEBUG) {
-                throw $throwable;
-            }
 
             $io->error('Could not read "$var".');
 

@@ -36,6 +36,9 @@ final class OutputFormatterStyleConfigurator {
         $outputFormatter->setStyle('ignored', new OutputFormatterStyle('gray'));
         $outputFormatter->setStyle('skipped', new OutputFormatterStyle('magenta'));
         $outputFormatter->setStyle('code', new OutputFormatterStyle('white'));
+        $outputFormatter->setStyle('verbose', new OutputFormatterStyle('#fffab1'));
+        $outputFormatter->setStyle('veryverbose', new OutputFormatterStyle('#fff67b'));
+        $outputFormatter->setStyle('debug', new OutputFormatterStyle('#ffee00'));
     }
 }
 

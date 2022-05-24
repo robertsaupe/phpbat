@@ -145,7 +145,7 @@ print(PHP_EOL.PHP_EOL);
 
 release();
 
-if (Application::VERSION_RELEASE === 'stable') {
+if (Application::VERSION_RELEASE === 'stable' || Application::VERSION_RELEASE === '') {
     print(PHP_EOL.PHP_EOL);
     release('latest');
     release('latest-stable');

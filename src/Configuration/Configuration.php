@@ -21,16 +21,14 @@ use Webmozart\Assert\Assert;
  */
 final class Configuration {
 
-    private const TEST_KEY = 'test';
-
     public static function create(string $file, stdClass $jsonObject, string $jsonString): self {
-        $test = self::retrieveTest($jsonObject);
+        $logging = self::retrieveLogging($jsonObject);
 
         return new self(
             $file,
             $jsonObject,
             $jsonString,
-            $test
+            $logging
         );
     }
 
@@ -38,7 +36,7 @@ final class Configuration {
         private string $file,
         private stdClass $jsonObject,
         private string $jsonString,
-        private string $test
+        private object $logging
     ) {
         
     }
@@ -55,15 +53,41 @@ final class Configuration {
         return $this->jsonString;
     }
 
-    public function getTest(): string {
-        return $this->test;
+    public function getLoggingEnabled(): bool {
+        return $this->logging->{'enabled'};
     }
 
-    private static function retrieveTest(stdClass $jsonObject): string {
-        Assert::notNull($jsonObject->{self::TEST_KEY}, 'Cannot retrieve test: no test configured.');
-        $test = trim($jsonObject->{self::TEST_KEY});
-        Assert::notEmpty($test, 'test cannot be empty.');
-        return $test;
+    public function getLoggingPath(): string {
+        return $this->logging->{'path'};
+    }
+
+    public function getLoggingVerbosity(): int {
+        return $this->logging->{'verbosity'};
+    }
+
+    public function getLoggingchmod(): int {
+        return $this->logging->{'chmod'};
+    }
+
+    private static function retrieveLogging(stdClass $jsonObject): object {
+        $key = 'logging';
+        Assert::notNull($jsonObject->{$key}, 'Cannot retrieve '.$key);
+        $key_enabled = 'enabled';
+        Assert::notNull($jsonObject->{$key}->{$key_enabled}, 'Cannot retrieve '.$key.'.'.$key_enabled);
+        Assert::boolean($jsonObject->{$key}->{$key_enabled}, 'Must be a boolean '.$key.'.'.$key_enabled);
+        $key_path = 'path';
+        Assert::notNull($jsonObject->{$key}->{$key_path}, 'Cannot retrieve '.$key.'.'.$key_path);
+        $jsonObject->{$key}->{$key_path} = trim($jsonObject->{$key}->{$key_path});
+        Assert::notEmpty($jsonObject->{$key}->{$key_path}, 'Cannot be empty '.$key.'.'.$key_path);
+        $key_verbosity = 'verbosity';
+        Assert::notNull($jsonObject->{$key}->{$key_verbosity}, 'Cannot retrieve '.$key.'.'.$key_verbosity);
+        Assert::integer($jsonObject->{$key}->{$key_verbosity}, 'Must be a number '.$key.'.'.$key_verbosity);
+        $key_chmod = 'chmod';
+        if (!isset($jsonObject->{$key}->{$key_chmod})) $jsonObject->{$key}->{$key_chmod} = '0600';
+        $jsonObject->{$key}->{$key_chmod} = trim($jsonObject->{$key}->{$key_chmod});
+        Assert::notEmpty($jsonObject->{$key}->{$key_chmod}, 'Cannot be empty '.$key.'.'.$key_chmod);
+        $jsonObject->{$key}->{$key_chmod} = octdec($jsonObject->{$key}->{$key_chmod});
+        return $jsonObject->{$key};
     }
 
 }

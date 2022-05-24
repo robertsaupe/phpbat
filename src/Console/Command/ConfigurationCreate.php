@@ -23,7 +23,6 @@ class ConfigurationCreate extends ConfigurationBaseCommand {
     private const DEFAULT_FILE = __DIR__.'/../../../res/default.json';
 
     private const FORCE_OPTION = 'force';
-    private const FORCE_OPTION_SHORT = 'f';
 
     protected function configure(): void {
         parent::configure();
@@ -32,7 +31,7 @@ class ConfigurationCreate extends ConfigurationBaseCommand {
         $this->setDescription('Creates the configuration file');
         $this->addOption(
             self::FORCE_OPTION,
-            self::FORCE_OPTION_SHORT,
+            null,
             InputOption::VALUE_NONE,
             'Overwrite existing configuration file'
         );
@@ -55,7 +54,7 @@ class ConfigurationCreate extends ConfigurationBaseCommand {
         //force option?
         if (!$io->getInput()->getOption(self::FORCE_OPTION) && file_exists($configurationFile)) {
             $io->error(sprintf('The configuration file "%s" already exists.', $configurationFile));
-            $io->note('You can force an overwrite with -f or --force option.');
+            $io->note('You can force an overwrite with --force option.');
             return 0;
         }
 

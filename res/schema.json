@@ -4,12 +4,35 @@
     "type": "object",
     "additionalProperties": false,
     "required": [
-        "test"
+        "logging"
     ],
     "properties":{
-        "test": {
-            "description": "test the configuration and validation",
-            "type": "string"
+        "logging": {
+            "description": "configures logger",
+            "type": "object",
+            "required": [
+                "enabled",
+                "path",
+                "verbosity"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Write to file enabled?"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Path where the files are saved."
+                },
+                "verbosity": {
+                    "type": "integer",
+                    "description": "Verbosity of the logger (default: 64) [quit: 0, error: 8, warn: 16, info: 32, normal: 64, verbose: 128, very-verbose: 256, debug: 512]"
+                },
+                "chmod": {
+                    "type": "string",
+                    "description": "The chmod used for the files. (default: 0600)"
+                }
+            }
         }
     }
 }
