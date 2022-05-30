@@ -16,7 +16,7 @@ namespace robertsaupe\phpbat\Console\Command;
 use robertsaupe\phpbat\Console\IO;
 use Symfony\Component\Console\Input\ArrayInput;
 
-class Configuration extends ConfigurationBaseCommand {
+class Configuration extends BaseCommand {
 
     protected function configure(): void {
         parent::configure();
@@ -26,14 +26,10 @@ class Configuration extends ConfigurationBaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
-
         $command = $this->getApplication()->find('list');
         $parameters = ['namespace' => 'configuration'];
         $input = new ArrayInput($parameters);
         $command->run($input, $io->getOutput());
-
         return 0;
     }
 }

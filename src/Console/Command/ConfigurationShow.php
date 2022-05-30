@@ -15,7 +15,7 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use robertsaupe\phpbat\Console\IO;
 
-class ConfigurationShow extends ConfigurationBaseCommand {
+class ConfigurationShow extends ConfigurationAppBaseCommand {
 
     protected function configure(): void {
         parent::configure();
@@ -25,14 +25,10 @@ class ConfigurationShow extends ConfigurationBaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
-
         $config = $this->getConfig($io);
         $io->title('Configuration');
         $io->writeln(sprintf('<code>%s</code>', $config->getJsonString()));
         $io->newLine();
-
         return 0;
     }
 }

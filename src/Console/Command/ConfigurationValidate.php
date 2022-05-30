@@ -15,10 +15,10 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use Exception;
 use RuntimeException;
-use robertsaupe\phpbat\Exception\JsonValidateException;
+use robertsaupe\Json\Exception\JsonValidateException;
 use robertsaupe\phpbat\Console\IO;
 
-class ConfigurationValidate extends ConfigurationBaseCommand {
+class ConfigurationValidate extends ConfigurationAppBaseCommand {
 
     protected function configure(): void {
         parent::configure();
@@ -28,45 +28,22 @@ class ConfigurationValidate extends ConfigurationBaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
 
         try {
             $config = $this->getConfig($io);
             $io->success('The configuration file passed the validation.');
         } catch (Exception $exception) {
             if ($io->isVerbose()) {
-                throw new RuntimeException(
-                    sprintf(
-                        'The configuration file failed validation: %s',
-                        $exception->getMessage(),
-                    ),
-                    $exception->getCode(),
-                    $exception,
-                );
-            }
-            if ($exception instanceof JsonValidateException) {
-                $io->writeln(
-                    sprintf(
-                        '<error>The configuration file failed validation: "%s" does not match the expected JSON schema:</error>',
-                        $exception->getValidatedFile(),
-                    ),
-                );
+                throw new RuntimeException(sprintf('The configuration file failed validation: %s', $exception->getMessage()), $exception->getCode(), $exception);
+            } else if ($exception instanceof JsonValidateException) {
+                $io->error(sprintf('The configuration file failed validation: "%s" does not match the expected JSON schema:', $exception->getValidatedFile()));
                 $io->newLine();
                 foreach ($exception->getErrors() as $error) {
                     $io->writeln("<comment>  - $error</comment>");
                 }
             } else {
-                $errorMessage = isset($exception)
-                    ? sprintf('The configuration file failed validation: %s', $exception->getMessage())
-                    : 'The configuration file failed validation.'
-                ;
-                $io->writeln(
-                    sprintf(
-                        '<error>%s</error>',
-                        $errorMessage,
-                    ),
-                );
+                $errorMessage = isset($exception) ? sprintf('The configuration file failed validation: %s', $exception->getMessage()) : 'The configuration file failed validation.';
+                $io->error(sprintf('%s', $errorMessage));
             }
         }
 

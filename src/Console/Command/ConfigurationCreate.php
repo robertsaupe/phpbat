@@ -18,7 +18,7 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use robertsaupe\phpbat\Console\IO;
 
-class ConfigurationCreate extends ConfigurationBaseCommand {
+class ConfigurationCreate extends ConfigurationAppBaseCommand {
 
     private const FILE_NAME = 'phpbat.json';
     private const DEFAULT_FILE = __DIR__.'/../../../res/default.json';
@@ -39,8 +39,6 @@ class ConfigurationCreate extends ConfigurationBaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
 
         //set configuration location
         $configurationFile = '';

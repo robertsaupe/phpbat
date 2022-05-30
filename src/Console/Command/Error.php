@@ -16,7 +16,7 @@ namespace robertsaupe\phpbat\Console\Command;
 use Throwable;
 use robertsaupe\phpbat\Console\IO;
 
-class Error extends BaseCommand {
+class Error extends AppBaseCommand {
 
     protected function configure() {
         $this->setName('error');
@@ -24,19 +24,13 @@ class Error extends BaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
-
         try {
             $var = 5 / 0;
             $io->writeln('$var: ' . $var);
         } catch (Throwable $throwable) {
-
-            $io->error('Could not read "$var".');
-
+            $io->error('Could not read "$var": '.$throwable->getMessage());
             return 1;
         }
-
         return 0;
     }
 }

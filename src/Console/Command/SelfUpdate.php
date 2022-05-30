@@ -19,7 +19,7 @@ use robertsaupe\phpbat\Console\IO;
 use robertsaupe\Phar\SelfUpdate\ManifestUpdate;
 use robertsaupe\Phar\SelfUpdate\ManifestStrategy;
 
-class SelfUpdate extends BaseCommand {
+class SelfUpdate extends AppBaseCommand {
 
     private const CHECK_OPTION = 'check';
     private const CHECK_OPTION_SHORT = 'c';
@@ -58,8 +58,6 @@ class SelfUpdate extends BaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
 
         $stability = ManifestStrategy::STABLE;
         if ($io->getInput()->getOption(self::UNSTABLE_OPTION)) {

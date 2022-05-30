@@ -55,12 +55,7 @@ final class Loader {
             throw $noConfigurationFound;
         }
 
-        $io->comment(
-            sprintf(
-                'Loading the configuration file "<comment>%s</comment>".',
-                $configPath,
-            ),
-        );
+        $io->comment(sprintf('Loading the configuration file "<comment>%s</comment>".', $configPath));
 
         return $configPath;
     }

@@ -15,7 +15,7 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use robertsaupe\phpbat\Console\IO;
 
-class Color extends BaseCommand {
+class Color extends AppBaseCommand {
 
     protected function configure()  {
         $this->setName('color');
@@ -23,9 +23,6 @@ class Color extends BaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
-        
         $io->caution('caution');
         $io->error('error');
         $io->warning('warning');

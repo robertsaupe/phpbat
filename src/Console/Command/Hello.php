@@ -15,7 +15,7 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use robertsaupe\phpbat\Console\IO;
 
-class Hello extends BaseCommand {
+class Hello extends AppBaseCommand {
 
     protected function configure() {
         $this->setName('hello');
@@ -23,9 +23,6 @@ class Hello extends BaseCommand {
     }
 
     public function executeCommand(IO $io):int {
-        $io->writeln($this->getApplication()->getHelp());
-        $io->newLine();
-
         $io->writeln('Hello World!');
         return 0;
     }

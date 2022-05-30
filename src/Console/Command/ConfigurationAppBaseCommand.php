@@ -21,7 +21,7 @@ use robertsaupe\phpbat\Configuration\Configuration;
 /**
  * @internal
  */
-abstract class ConfigurationBaseCommand extends BaseCommand {
+abstract class ConfigurationAppBaseCommand extends AppBaseCommand {
 
     private const CONFIG_PARAM = 'config';
     private const CONFIG_PARAM_SHORT = 'c';
@@ -36,10 +36,7 @@ abstract class ConfigurationBaseCommand extends BaseCommand {
     }
 
     final protected function getConfig(IO $io): Configuration {
-        return ConfigurationLoader::getConfig(
-            $io->getInput()->getOption(self::CONFIG_PARAM),
-            $io
-        );
+        return ConfigurationLoader::getConfig($io->getInput()->getOption(self::CONFIG_PARAM), $io);
     }
 
 }
