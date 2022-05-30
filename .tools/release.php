@@ -10,7 +10,7 @@
  */
 
 use robertsaupe\phpbat\Console\Application;
-use robertsaupe\phpbat\Json;
+use robertsaupe\Json\Json;
 
 define('APP_DIR', dirname(__DIR__));
 
