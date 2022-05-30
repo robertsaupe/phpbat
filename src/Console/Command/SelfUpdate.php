@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace robertsaupe\phpbat\Console\Command;
 
+use Exception;
 use Symfony\Component\Console\Input\InputOption;
 use robertsaupe\phpbat\Console\IO;
-use robertsaupe\phpbat\SelfUpdate\Update;
-use robertsaupe\phpbat\SelfUpdate\ManifestStrategy;
+use robertsaupe\Phar\SelfUpdate\ManifestUpdate;
+use robertsaupe\Phar\SelfUpdate\ManifestStrategy;
 
 class SelfUpdate extends BaseCommand {
 
@@ -28,6 +29,8 @@ class SelfUpdate extends BaseCommand {
 
     private const UNSTABLE_OPTION = 'unstable';
     private const UNSTABLE_OPTION_SHORT = 'u';
+
+    private const MANIFEST_URL = 'https://robertsaupe.github.io/phpbat/release/manifest.json';
 
     protected function configure(): void {
         parent::configure();
@@ -63,19 +66,67 @@ class SelfUpdate extends BaseCommand {
             $stability = ManifestStrategy::ANY;
         }
 
-        $update = new Update($io, $this->getApplication()->getVersion(), $stability);
+        $updater = new ManifestUpdate($this->getApplication()->getVersion(), self::MANIFEST_URL, stability:$stability);
 
         if ($io->getInput()->getOption(self::ROLLBACK_OPTION)) {
-            $update->rollback();
+            $io->writeln('Rollback ...' . PHP_EOL);
+            try {
+                $result = $updater->rollback();
+                if ($result) {
+                    $io->success('Application has been rolled back to prior version.');
+                } else {
+                    $io->error('Rollback failed for reasons unknown.');
+                }
+            } catch (Exception $e) {
+                $io->error(sprintf('%s', $e->getMessage()));
+            }
             return 0;
         }
 
         if ($io->getInput()->getOption(self::CHECK_OPTION)) {
-            $update->printAvailableUpdates();
+            $io->writeln('Check for Updates ...' . PHP_EOL);
+            $io->writeln(sprintf('Your current local build version is: <options=bold>%s</options=bold>', $updater->getCurrentLocalVersion()));
+            try {
+                $result = $updater->getCurrentRemoteVersion();
+                if ($result) {
+                    $io->writeln(sprintf('The current %s build available remotely is: <options=bold>%s</options=bold>', $updater->getStability(), $result));
+                } else {
+                    $io->writeln(sprintf('You have the current %s build installed.', $updater->getStability()));
+                }
+            } catch (Exception $e) {
+                $io->error(sprintf('%s', $e->getMessage()));
+            }
             return 0;
         }
 
-        $update->doUpdate();
+        try {
+            $io->writeln('Updating ...' . PHP_EOL);
+            $result = $updater->update();
+            $newVersion = $updater->getNewVersion();
+            $oldVersion = $updater->getOldVersion();
+
+            if ($result) {
+                $io->success('Application has been updated.');
+                $io->writeln(sprintf(
+                    '<fg=green>Current version is:</fg=green> <options=bold>%s</options=bold>.',
+                    $newVersion
+                ));
+                $io->writeln(sprintf(
+                    '<fg=green>Previous version was:</fg=green> <options=bold>%s</options=bold>.',
+                    $oldVersion
+                ));
+            } else {
+                $io->success('Application is currently up to date.');
+                $io->writeln(sprintf(
+                    '<fg=green>Current version is:</fg=green> <options=bold>%s</options=bold>.',
+                    $oldVersion
+                ));
+            }
+        } catch (Exception $e) {
+            $io->error(sprintf('%s', $e->getMessage()));
+        }
+
+        $io->info('You can also select unstable update stability using --unstable or -u');
 
         return 0;
     }
