@@ -17,7 +17,7 @@ use InvalidArgumentException;
 use robertsaupe\phpbat\NotInstantiable;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\phpbat\Exception\NoConfigurationFound;
-use robertsaupe\json\Json;
+use robertsaupe\Json\Json;
 
 /**
  * @internal
