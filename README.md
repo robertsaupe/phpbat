@@ -15,7 +15,7 @@
 
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
-![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.logo/phpbat_mini.png)
+![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/phar/.logo/phpbat_mini.png)
 
 # phpBAT - a PHP based Backup &amp; Admin Tool
 
