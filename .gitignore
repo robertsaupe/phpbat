@@ -3,3 +3,6 @@
 /phpbat.json
 /build/
 /logs/
+/bin/jsonlint
+/bin/validate-json
+/bin/var-dump-server
