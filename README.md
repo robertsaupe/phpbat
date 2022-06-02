@@ -31,6 +31,7 @@
 
 ## Supporting
 
+[GitHub](https://github.com/sponsors/robertsaupe) |
 [Patreon](https://www.patreon.com/robertsaupe) |
 [PayPal](https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ) |
 [Amazon](https://www.amazon.de/ref=as_li_ss_tl?ie=UTF8&linkCode=ll2&tag=robertsaupe-21&linkId=b79bc86cee906816af515980cb1db95e&language=de_DE)
