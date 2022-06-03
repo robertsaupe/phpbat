@@ -21,14 +21,16 @@ class ConfigurationShow extends BasicCommandConfiguration {
         parent::configure();
         $this->setName('configuration:show');
         $this->setAliases(array('conf:show', 'cfg:show', 'cfg:s'));
-        $this->setDescription('Shows the configuration file');
+        $this->setDescription('Shows the configuration (useful to debug failures)');
     }
 
     public function executeCommand(IO $io):int {
         $config = $this->getConfig($io);
+
         $io->title('Configuration');
-        $io->writeln(sprintf('<code>%s</code>', $config->getJsonString()));
+        $io->writeln(sprintf('<code>%s</code>', print_r($config, true)));
         $io->newLine();
+
         return 0;
     }
 }

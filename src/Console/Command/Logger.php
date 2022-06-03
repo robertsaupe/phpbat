@@ -26,7 +26,7 @@ class Logger extends BasicCommandConfiguration {
 
     public function executeCommand(IO $io):int {
         $config = $this->getConfig($io);
-        $logger = new ConsoleLogger($config->getLoggingEnabled(), $io, $config->getLoggingPath(), 'test', $config->getLoggingchmod(), verbosityKey:$config->getLoggingVerbosity());
+        $logger = new ConsoleLogger($config->getLogging()->getEnabled(), $io, $config->getLogging()->getPath(), 'test', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
         $logger->error('test.1');
         $logger->warning('test.2');
         $logger->info('test.3');

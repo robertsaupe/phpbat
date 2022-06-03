@@ -11,14 +11,12 @@
             "description": "configures logger",
             "type": "object",
             "required": [
-                "enabled",
-                "path",
-                "verbosity"
+                "path"
             ],
             "properties": {
                 "enabled": {
                     "type": "boolean",
-                    "description": "Write to file enabled?"
+                    "description": "Write to file enabled? (default: true)"
                 },
                 "path": {
                     "type": "string",
