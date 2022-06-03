@@ -16,7 +16,7 @@ namespace robertsaupe\phpbat\Console\Command;
 use Throwable;
 use robertsaupe\phpbat\Console\IO;
 
-class Error extends AppBaseCommand {
+class Error extends BasicCommandApp {
 
     protected function configure() {
         $this->setName('error');

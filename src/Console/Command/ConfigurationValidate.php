@@ -18,7 +18,7 @@ use RuntimeException;
 use robertsaupe\Json\Exception\JsonValidateException;
 use robertsaupe\phpbat\Console\IO;
 
-class ConfigurationValidate extends ConfigurationAppBaseCommand {
+class ConfigurationValidate extends BasicCommandConfiguration {
 
     protected function configure(): void {
         parent::configure();

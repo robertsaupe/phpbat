@@ -16,7 +16,7 @@ namespace robertsaupe\phpbat\Console\Command;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\phpbat\Console\Logger as ConsoleLogger;
 
-class Logger extends ConfigurationAppBaseCommand {
+class Logger extends BasicCommandConfiguration {
 
     protected function configure(): void {
         parent::configure();

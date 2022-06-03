@@ -15,7 +15,7 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use robertsaupe\phpbat\Console\IO;
 
-class ConfigurationShow extends ConfigurationAppBaseCommand {
+class ConfigurationShow extends BasicCommandConfiguration {
 
     protected function configure(): void {
         parent::configure();

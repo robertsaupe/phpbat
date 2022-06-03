@@ -22,7 +22,7 @@ use robertsaupe\phpbat\Console\OutputFormatterStyleConfigurator;
 /**
  * @internal
  */
-abstract class BaseCommand extends Command {
+abstract class BasicCommand extends Command {
 
     abstract protected function executeCommand(IO $io): int;
 

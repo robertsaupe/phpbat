@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @internal
  */
-abstract class AppBaseCommand extends BaseCommand {
+abstract class BasicCommandApp extends BasicCommand {
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $output->writeln($this->getApplication()->getHelp());

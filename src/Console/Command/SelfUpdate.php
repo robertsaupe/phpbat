@@ -19,7 +19,7 @@ use robertsaupe\phpbat\Console\IO;
 use robertsaupe\Phar\SelfUpdate\ManifestUpdate;
 use robertsaupe\Phar\SelfUpdate\ManifestStrategy;
 
-class SelfUpdate extends AppBaseCommand {
+class SelfUpdate extends BasicCommandApp {
 
     private const CHECK_OPTION = 'check';
     private const CHECK_OPTION_SHORT = 'c';

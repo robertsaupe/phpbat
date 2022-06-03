@@ -15,7 +15,7 @@ namespace robertsaupe\phpbat\Console\Command;
 
 use robertsaupe\phpbat\Console\IO;
 
-class Hello extends AppBaseCommand {
+class Hello extends BasicCommandApp {
 
     protected function configure() {
         $this->setName('hello');

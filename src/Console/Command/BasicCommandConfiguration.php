@@ -21,7 +21,7 @@ use robertsaupe\phpbat\Configuration\Configuration;
 /**
  * @internal
  */
-abstract class ConfigurationAppBaseCommand extends AppBaseCommand {
+abstract class BasicCommandConfiguration extends BasicCommandApp {
 
     private const CONFIG_PARAM = 'config';
     private const CONFIG_PARAM_SHORT = 'c';
