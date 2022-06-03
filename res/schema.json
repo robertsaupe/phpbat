@@ -25,8 +25,8 @@
                     "description": "Path where the files are saved."
                 },
                 "verbosity": {
-                    "type": "integer",
-                    "description": "Verbosity of the logger (default: 64) [quit: 0, error: 8, warn: 16, info: 32, normal: 64, verbose: 128, very-verbose: 256, debug: 512]"
+                    "type": "string",
+                    "description": "Verbosity of the logger (default: normal) [error, warning, info, normal, verbose, veryverbose, debug]"
                 },
                 "chmod": {
                     "type": "string",

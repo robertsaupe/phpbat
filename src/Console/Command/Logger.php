@@ -26,16 +26,16 @@ class Logger extends BasicCommandConfiguration {
 
     public function executeCommand(IO $io):int {
         $config = $this->getConfig($io);
-        $logger = new ConsoleLogger($config->getLoggingEnabled(), $config->getLoggingPath(), 'test', $config->getLoggingVerbosity(), $config->getLoggingchmod(), $io);
+        $logger = new ConsoleLogger($config->getLoggingEnabled(), $io, $config->getLoggingPath(), 'test', $config->getLoggingchmod(), verbosityKey:$config->getLoggingVerbosity());
         $logger->error('test.1');
         $logger->warning('test.2');
         $logger->info('test.3');
-        $logger->write('test.4');
+        $logger->normal('test.4.1');
+        $logger->write('test.4.2');
         $logger->verbose('test.5');
-        $logger->very_verbose('test.6');
-        $logger->debug('test.7');
-        print_r($logger->getAllFormattedMessagesByVerbosity(isHTML:false));
-        print_r($logger->getAllFormattedMessagesByVerbosity(isHTML:true));
+        $logger->veryverbose('test.6');
+        $logger->debug('test.7.1');
+        $logger->veryveryverbose('test.7.2');
         return 0;
     }
 }

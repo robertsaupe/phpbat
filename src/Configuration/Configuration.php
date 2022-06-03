@@ -61,7 +61,7 @@ final class Configuration {
         return $this->logging->{'path'};
     }
 
-    public function getLoggingVerbosity(): int {
+    public function getLoggingVerbosity(): string {
         return $this->logging->{'verbosity'};
     }
 
@@ -81,7 +81,7 @@ final class Configuration {
         Assert::notEmpty($jsonObject->{$key}->{$key_path}, 'Cannot be empty '.$key.'.'.$key_path);
         $key_verbosity = 'verbosity';
         Assert::notNull($jsonObject->{$key}->{$key_verbosity}, 'Cannot retrieve '.$key.'.'.$key_verbosity);
-        Assert::integer($jsonObject->{$key}->{$key_verbosity}, 'Must be a number '.$key.'.'.$key_verbosity);
+        Assert::string($jsonObject->{$key}->{$key_verbosity}, 'Must be a string '.$key.'.'.$key_verbosity);
         $key_chmod = 'chmod';
         if (!isset($jsonObject->{$key}->{$key_chmod})) $jsonObject->{$key}->{$key_chmod} = '0600';
         $jsonObject->{$key}->{$key_chmod} = trim($jsonObject->{$key}->{$key_chmod});
