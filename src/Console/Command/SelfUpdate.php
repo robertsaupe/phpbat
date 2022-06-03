@@ -13,16 +13,20 @@ declare(strict_types=1);
 
 namespace robertsaupe\phpbat\Console\Command;
 
+use function sprintf;
 use Exception;
 use Symfony\Component\Console\Input\InputOption;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\Phar\SelfUpdate\ManifestUpdate;
 use robertsaupe\Phar\SelfUpdate\ManifestStrategy;
+use robertsaupe\phpbat\Console\Application;
+use robertsaupe\phpbat\Console\Logger as ConsoleLogger;
 
-class SelfUpdate extends BasicCommandApp {
+class SelfUpdate extends BasicCommandConfiguration {
 
     private const CHECK_OPTION = 'check';
-    private const CHECK_OPTION_SHORT = 'c';
+
+    private const NOLOG_OPTION = 'no-log';
 
     private const ROLLBACK_OPTION = 'rollback';
     private const ROLLBACK_OPTION_SHORT = 'r';
@@ -39,9 +43,15 @@ class SelfUpdate extends BasicCommandApp {
         $this->setDescription('Update to most recent build. Default: stable');
         $this->addOption(
             self::CHECK_OPTION,
-            self::CHECK_OPTION_SHORT,
+            null,
             InputOption::VALUE_NONE,
             'Checks what updates are available'
+        );
+        $this->addOption(
+            self::NOLOG_OPTION,
+            null,
+            InputOption::VALUE_NONE,
+            'Disable logging for this update'
         );
         $this->addOption(
             self::ROLLBACK_OPTION,
@@ -58,70 +68,78 @@ class SelfUpdate extends BasicCommandApp {
     }
 
     public function executeCommand(IO $io):int {
+        $config = $this->getConfig($io);
 
-        $stability = ManifestStrategy::STABLE;
+        if ($io->getInput()->getOption(self::NOLOG_OPTION)) {
+            $logger = new ConsoleLogger(false, $io, $config->getLogging()->getPath(), 'update', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
+        } else {
+            $logger = new ConsoleLogger($config->getLogging()->getEnabled(), $io, $config->getLogging()->getPath(), 'update', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
+        }
+
+        $app = $this->getApplication();
+        if (is_object($app) && $app instanceof Application) {
+            $logger->infoNoOutput(sprintf('%s version %s %s', $app->getName(), $app->getVersion(), $app->getVersionBuild()));
+        }
+
+        $logger->verbose('SelfUpdate started');
+
         if ($io->getInput()->getOption(self::UNSTABLE_OPTION)) {
             $stability = ManifestStrategy::ANY;
+            $logger->verbose('use stability: unstable');
+        } else {
+            $stability = ManifestStrategy::STABLE;
+            $logger->verbose('use stability: stable');
         }
 
         $updater = new ManifestUpdate($this->getApplication()->getVersion(), self::MANIFEST_URL, stability:$stability);
 
         if ($io->getInput()->getOption(self::ROLLBACK_OPTION)) {
-            $io->writeln('Rollback ...' . PHP_EOL);
+            $logger->write('Rollback ...');
             try {
                 $result = $updater->rollback();
                 if ($result) {
-                    $io->success('Application has been rolled back to prior version.');
+                    $logger->info('Application has been rolled back to prior version.');
                 } else {
-                    $io->error('Rollback failed for reasons unknown.');
+                    $logger->error('Rollback failed for reasons unknown.');
                 }
             } catch (Exception $e) {
-                $io->error(sprintf('%s', $e->getMessage()));
+                $logger->error(sprintf('%s', $e->getMessage()));
             }
             return 0;
         }
 
         if ($io->getInput()->getOption(self::CHECK_OPTION)) {
-            $io->writeln('Check for Updates ...' . PHP_EOL);
-            $io->writeln(sprintf('Your current local build version is: <options=bold>%s</options=bold>', $updater->getCurrentLocalVersion()));
+            $logger->write('Check for Updates ...');
+            $logger->verbose(sprintf('Your current local build version is: <options=bold>%s</options=bold>', $updater->getCurrentLocalVersion()));
             try {
                 $result = $updater->getCurrentRemoteVersion();
                 if ($result) {
-                    $io->writeln(sprintf('The current %s build available remotely is: <options=bold>%s</options=bold>', $updater->getStability(), $result));
+                    $logger->info(sprintf('The current %s build available remotely is: <options=bold>%s</options=bold>', $updater->getStability(), $result));
                 } else {
-                    $io->writeln(sprintf('You have the current %s build installed.', $updater->getStability()));
+                    $logger->info(sprintf('You have the current %s build installed.', $updater->getStability()));
                 }
             } catch (Exception $e) {
-                $io->error(sprintf('%s', $e->getMessage()));
+                $logger->error(sprintf('%s', $e->getMessage()));
             }
             return 0;
         }
 
         try {
-            $io->writeln('Updating ...' . PHP_EOL);
+            $logger->write('Updating ...');
             $result = $updater->update();
             $newVersion = $updater->getNewVersion();
             $oldVersion = $updater->getOldVersion();
 
             if ($result) {
-                $io->success('Application has been updated.');
-                $io->writeln(sprintf(
-                    '<fg=green>Current version is:</fg=green> <options=bold>%s</options=bold>.',
-                    $newVersion
-                ));
-                $io->writeln(sprintf(
-                    '<fg=green>Previous version was:</fg=green> <options=bold>%s</options=bold>.',
-                    $oldVersion
-                ));
+                $logger->info('Application has been updated.');
+                $logger->write(sprintf('Current version is: %s.', $newVersion));
+                $logger->write(sprintf('Previous version was: %s.', $oldVersion));
             } else {
-                $io->success('Application is currently up to date.');
-                $io->writeln(sprintf(
-                    '<fg=green>Current version is:</fg=green> <options=bold>%s</options=bold>.',
-                    $oldVersion
-                ));
+                $logger->info('Application is currently up to date.');
+                $logger->write(sprintf('Current version is: %s.', $oldVersion));
             }
         } catch (Exception $e) {
-            $io->error(sprintf('%s', $e->getMessage()));
+            $logger->error(sprintf('%s', $e->getMessage()));
         }
 
         $io->info('You can also select unstable update stability using --unstable or -u');

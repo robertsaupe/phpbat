@@ -50,37 +50,58 @@ final class Logger extends LogFile {
 
     public function error(string $message): LogMessage {
         $this->io->error($message);
-        return $this->log($message, self::VERBOSITY_KEY_ERROR);
+        return parent::error($message);
     }
 
     public function warning(string $message): LogMessage {
         $this->io->warning($message);
-        return $this->log($message, self::VERBOSITY_KEY_WARNING);
+        return parent::warning($message);
     }
 
     public function info(string $message): LogMessage {
         $this->io->info($message);
-        return $this->log($message, self::VERBOSITY_KEY_INFO);
+        return parent::info($message);
     }
 
     public function normal(string $message): LogMessage {
         $this->io->writeln($message);
-        return $this->log($message, self::VERBOSITY_KEY_NORMAL);
+        return parent::normal($message);
     }
 
     public function verbose(string $message): LogMessage {
         $this->io->writeln('<verbose>' . $message . '</verbose>', OutputInterface::VERBOSITY_VERBOSE);
-        return $this->log($message, self::VERBOSITY_KEY_VERBOSE);
+        return parent::verbose($message);
     }
 
     public function veryverbose(string $message): LogMessage {
         $this->io->writeln('<veryverbose>' . $message . '</veryverbose>', OutputInterface::VERBOSITY_VERY_VERBOSE);
-        return $this->log($message, self::VERBOSITY_KEY_VERYVERBOSE);
+        return parent::veryverbose($message);
     }
 
     public function debug(string $message): LogMessage {
         $this->io->writeln('<debug>' . $message . '</debug>', OutputInterface::VERBOSITY_DEBUG);
-        return $this->log($message, self::VERBOSITY_KEY_DEBUG);
+        return parent::debug($message);
+    }
+
+    /**
+     * same as info, but without console output
+     */
+    public function infoNoOutput(string $message): LogMessage {
+        return parent::info($message);
+    }
+
+    /**
+     * same as normal, but without console output
+     */
+    public function normalNoOutput(string $message): LogMessage {
+        return parent::normal($message);
+    }
+
+    /**
+     * same as write, but without console output
+     */
+    public function writeNoOutput(string $message): LogMessage {
+        return parent::write($message);
     }
 
     /**
