@@ -16,10 +16,14 @@ define('APP_DIR', dirname(__DIR__));
 
 include_once(APP_DIR . '/vendor/autoload.php');
 
+define('COMPOSER_MANIFEST', APP_DIR . '/composer.json');
+
 define('FILE_NAME', 'phpbat.phar');
 define('BUILD_FILE', APP_DIR . '/build/' . FILE_NAME);
+
 define('RELEASE_DIR', dirname(APP_DIR) . '/gh-pages/release');
 define('RELEASE_MANIFEST', RELEASE_DIR . '/manifest.json');
+
 define('RELEASE_REMOTE_URL', 'https://robertsaupe.github.io/phpbat/release');
 
 function release($version = Application::VERSION) {
@@ -112,14 +116,18 @@ function release($version = Application::VERSION) {
     if (file_exists(RELEASE_MANIFEST)) {
         $jsonObject = $json->decodeFile(RELEASE_MANIFEST, true);
     }
+
+    $jsonObjectComposer = $json->decodeFile(COMPOSER_MANIFEST, true);
     
     $jsonObject[$version] = [
-        //"version" => $version,
         "version" => Application::VERSION,
         "url" => RELEASE_REMOTE_URL . '/' . $version . '/' . FILE_NAME,
         "sha1" => $release_hash_sha1,
         "sha256" => $release_hash_sha256,
         "sha512" => $release_hash_sha512,
+        "php" => [
+            "min" => $jsonObjectComposer["config"]["platform"]["php"]
+        ]
     ];
     
     $jsonString = json_encode($jsonObject, JSON_PRETTY_PRINT);
