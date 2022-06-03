@@ -3,16 +3,10 @@
     "description": "Settings used to backup and administrate a server or webspace using phpBAT.",
     "type": "object",
     "additionalProperties": false,
-    "required": [
-        "logging"
-    ],
     "properties":{
         "logging": {
             "description": "configures logger",
             "type": "object",
-            "required": [
-                "path"
-            ],
             "properties": {
                 "enabled": {
                     "type": "boolean",
@@ -20,7 +14,7 @@
                 },
                 "path": {
                     "type": "string",
-                    "description": "Path where the files are saved."
+                    "description": "Path where the files are saved. (default: logs)"
                 },
                 "verbosity": {
                     "type": "string",

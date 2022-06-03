@@ -26,16 +26,16 @@ final class Logging {
     public static function create(stdClass $jsonObject): self {
 
         $key = 'logging';
-        $object = $jsonObject->{$key};
-        Assert::notNull($object, 'Cannot retrieve ' . $key);
+        $object = (isset($jsonObject->{$key}) ? $jsonObject->{$key} : new stdClass());
+        //Assert::notNull($object, 'Cannot retrieve ' . $key);
 
         $keyEnabled = 'enabled';
         $objectEnabled = (isset($object->{$keyEnabled}) ? $object->{$keyEnabled} : true);
         Assert::boolean($objectEnabled, 'Must be a boolean ' .$key . '.' . $keyEnabled);
 
         $keyPath = 'path';
-        $objectPath = (isset($object->{$keyPath}) ? $object->{$keyPath} : null);
-        Assert::notNull($objectPath, 'Cannot retrieve ' . $key . '.' . $keyPath);
+        $objectPath = (isset($object->{$keyPath}) ? $object->{$keyPath} : 'logs');
+        Assert::string($objectPath, 'Must be a string ' . $key . '.' . $keyPath);
         $objectPath = trim($objectPath);
         Assert::notEmpty($objectPath, 'Cannot be empty ' . $key . '.' . $keyPath);
 
