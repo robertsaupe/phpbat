@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace robertsaupe\phpbat\Configuration;
 
 use stdClass;
+use function function_exists;
+use Webmozart\Assert\Assert;
 use robertsaupe\phpbat\Configuration\Entry\Logging;
 
 /**
@@ -22,10 +24,15 @@ use robertsaupe\phpbat\Configuration\Entry\Logging;
 final class Configuration {
 
     public static function create(string $file, stdClass $jsonObject, string $jsonString): self {
+
+        $timezone = self::retrieveTimeZone($jsonObject);
+        self::setTimeZone($timezone);
+
         return new self(
             $file,
             $jsonObject,
             $jsonString,
+            $timezone,
             Logging::create($jsonObject)
         );
     }
@@ -34,6 +41,7 @@ final class Configuration {
         private string $file,
         private stdClass $jsonObject,
         private string $jsonString,
+        private string $timezone,
         private Logging $logging
     ) {
         
@@ -53,6 +61,22 @@ final class Configuration {
 
     public function getLogging(): Logging {
         return $this->logging;
+    }
+
+    public function getTimeZone(): string {
+        return $this->timezone;
+    }
+
+    private static function retrieveTimeZone(stdClass $jsonObject): string {
+        $key = 'timezone';
+        $timezone = (isset($jsonObject->{$key}) ? $jsonObject->{$key} : '');
+        Assert::string($timezone, 'Must be a string ' . $key);
+        return $timezone;
+    }
+
+    private static function setTimeZone($timezone): bool {
+        if (function_exists('date_default_timezone_set') && $timezone !== '' && $timezone !== 'default') return date_default_timezone_set($timezone);
+        return false;
     }
 
 }

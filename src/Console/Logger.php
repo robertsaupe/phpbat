@@ -15,6 +15,8 @@ namespace robertsaupe\phpbat\Console;
 
 use function sprintf;
 use function is_array;
+use function function_exists;
+use function date_default_timezone_get;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use robertsaupe\Logger\LogFile;
@@ -64,6 +66,7 @@ final class Logger extends LogFile {
             } else {
                 $this->writeNoOutput(sprintf('OS: %s', OS::getType()));
             }
+            if (function_exists('date_default_timezone_get')) $this->verboseNoOutput(sprintf('TimeZone: %s', date_default_timezone_get()));
             $this->verboseNoOutput(sprintf('Logging->Verbosity: %s', $this->verbosityKey));
             $this->verboseNoOutput(sprintf('Logging->TotalSpace: %s', Info::decodeSize(Info::getTotalSpace($this->fileBasePath))));
             $this->writeNoOutput(sprintf('Logging->FreeSpace: %s', Info::decodeSize(Info::getFreeSpace($this->fileBasePath))));

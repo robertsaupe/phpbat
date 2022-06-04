@@ -4,6 +4,10 @@
     "type": "object",
     "additionalProperties": false,
     "properties":{
+        "timezone": {
+            "description": "Sets the default timezone",
+            "type": "string"
+        },
         "logging": {
             "description": "configures logger",
             "type": "object",

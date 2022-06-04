@@ -1,4 +1,5 @@
 {
+    "timezone": "default",
     "logging": {
         "enabled": true,
         "path": "logs",
