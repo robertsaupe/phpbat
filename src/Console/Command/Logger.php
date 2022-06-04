@@ -25,8 +25,19 @@ class Logger extends BasicCommandConfiguration {
     }
 
     public function executeCommand(IO $io):int {
+
         $config = $this->getConfig($io);
-        $logger = new ConsoleLogger($config->getLogging()->getEnabled(), $io, $config->getLogging()->getPath(), 'test', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
+
+        $logger = new ConsoleLogger(
+            $this->getApplication(),
+            $config->getLogging()->getEnabled(),
+            $io,
+            $config->getLogging()->getPath(),
+            'test',
+            $config->getLogging()->getChmod(),
+            verbosityKey:$config->getLogging()->getVerbosityKey()
+        );
+
         $logger->error('test.1');
         $logger->warning('test.2');
         $logger->info('test.3');
@@ -36,6 +47,17 @@ class Logger extends BasicCommandConfiguration {
         $logger->veryverbose('test.6');
         $logger->debug('test.7.1');
         $logger->veryveryverbose('test.7.2');
+
+        $logger->errorNoOutput('test.1');
+        $logger->warningNoOutput('test.2');
+        $logger->infoNoOutput('test.3');
+        $logger->normalNoOutput('test.4.1');
+        $logger->writeNoOutput('test.4.2');
+        $logger->verboseNoOutput('test.5');
+        $logger->veryverboseNoOutput('test.6');
+        $logger->debugNoOutput('test.7.1');
+        $logger->veryveryverboseNoOutput('test.7.2');
+
         return 0;
     }
 }

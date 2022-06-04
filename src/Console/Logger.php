@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace robertsaupe\phpbat\Console;
 
+use function sprintf;
+use function is_array;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use robertsaupe\Logger\LogFile;
 use robertsaupe\Logger\LogMessage;
 use robertsaupe\phpbat\Console\IO;
+use robertsaupe\phpbat\Console\Application;
+use robertsaupe\SystemInfo\OS;
+use robertsaupe\SystemInfo\Info;
 
 /**
  * @internal
@@ -25,6 +30,7 @@ use robertsaupe\phpbat\Console\IO;
 final class Logger extends LogFile {
 
     public function __construct(
+        protected Application $application,
         protected bool $isWriteToFileEnabled,
         protected IO $io,
         protected string $fileBasePath,
@@ -46,6 +52,23 @@ final class Logger extends LogFile {
                 $this->dateFormat,
                 $this->messageFormat
             );
+            $this->infoNoOutput(sprintf('%s version %s %s', $this->application->getName(), $this->application->getVersion(), $this->application->getVersionBuild()));
+            $this->infoNoOutput(sprintf('HostName: %s', OS::getHostName()));
+            if (OS::getType() == 'Linux') {
+                $info = OS::getLinuxInfo();
+                if (isset($info) && is_array($info) && isset($info['name'])) {
+                    $this->writeNoOutput(sprintf('OS: %s', $info['name']));
+                } else {
+                    $this->writeNoOutput(sprintf('OS: %s', 'Unknown Linux'));
+                }
+            } else {
+                $this->writeNoOutput(sprintf('OS: %s', OS::getType()));
+            }
+            $this->verboseNoOutput(sprintf('Logging->Verbosity: %s', $this->verbosityKey));
+            $this->verboseNoOutput(sprintf('Logging->TotalSpace: %s', Info::decodeSize(Info::getTotalSpace($this->fileBasePath))));
+            $this->writeNoOutput(sprintf('Logging->FreeSpace: %s', Info::decodeSize(Info::getFreeSpace($this->fileBasePath))));
+            $this->verboseNoOutput(sprintf('Logging->UsedSpace: %s', Info::decodeSize(Info::getUsedSpace($this->fileBasePath))));
+            $this->writeNoOutput(sprintf('Logging->DirectorySize: %s', Info::decodeSize(Info::getDirectorySize($this->fileBasePath))));
     }
 
     public function error(string $message): LogMessage {
@@ -84,6 +107,20 @@ final class Logger extends LogFile {
     }
 
     /**
+     * same as error, but without console output
+     */
+    public function errorNoOutput(string $message): LogMessage {
+        return parent::error($message);
+    }
+
+    /**
+     * same as warning, but without console output
+     */
+    public function warningNoOutput(string $message): LogMessage {
+        return parent::warning($message);
+    }
+
+    /**
      * same as info, but without console output
      */
     public function infoNoOutput(string $message): LogMessage {
@@ -101,7 +138,35 @@ final class Logger extends LogFile {
      * same as write, but without console output
      */
     public function writeNoOutput(string $message): LogMessage {
-        return parent::write($message);
+        return parent::normal($message);
+    }
+
+    /**
+     * same as verbose, but without console output
+     */
+    public function verboseNoOutput(string $message): LogMessage {
+        return parent::verbose($message);
+    }
+
+    /**
+     * same as veryverbose, but without console output
+     */
+    public function veryverboseNoOutput(string $message): LogMessage {
+        return parent::veryverbose($message);
+    }
+
+    /**
+     * same as veryveryverbose, but without console output
+     */
+    public function veryveryverboseNoOutput(string $message): LogMessage {
+        return parent::debug($message);
+    }
+
+    /**
+     * same as debug, but without console output
+     */
+    public function debugNoOutput(string $message): LogMessage {
+        return parent::debug($message);
     }
 
     /**

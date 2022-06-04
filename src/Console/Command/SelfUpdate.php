@@ -19,7 +19,6 @@ use Symfony\Component\Console\Input\InputOption;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\Phar\SelfUpdate\ManifestUpdate;
 use robertsaupe\Phar\SelfUpdate\ManifestStrategy;
-use robertsaupe\phpbat\Console\Application;
 use robertsaupe\phpbat\Console\Logger as ConsoleLogger;
 
 class SelfUpdate extends BasicCommandConfiguration {
@@ -70,16 +69,15 @@ class SelfUpdate extends BasicCommandConfiguration {
     public function executeCommand(IO $io):int {
         $config = $this->getConfig($io);
 
-        if ($io->getInput()->getOption(self::NOLOG_OPTION)) {
-            $logger = new ConsoleLogger(false, $io, $config->getLogging()->getPath(), 'update', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
-        } else {
-            $logger = new ConsoleLogger($config->getLogging()->getEnabled(), $io, $config->getLogging()->getPath(), 'update', $config->getLogging()->getChmod(), verbosityKey:$config->getLogging()->getVerbosityKey());
-        }
-
-        $app = $this->getApplication();
-        if (is_object($app) && $app instanceof Application) {
-            $logger->infoNoOutput(sprintf('%s version %s %s', $app->getName(), $app->getVersion(), $app->getVersionBuild()));
-        }
+        $logger = new ConsoleLogger(
+            $this->getApplication(),
+            $io->getInput()->getOption(self::NOLOG_OPTION) ? false : $config->getLogging()->getEnabled(),
+            $io,
+            $config->getLogging()->getPath(),
+            'update',
+            $config->getLogging()->getChmod(),
+            verbosityKey:$config->getLogging()->getVerbosityKey()
+        );
 
         $logger->verbose('SelfUpdate started');
 
@@ -110,11 +108,11 @@ class SelfUpdate extends BasicCommandConfiguration {
 
         if ($io->getInput()->getOption(self::CHECK_OPTION)) {
             $logger->write('Check for Updates ...');
-            $logger->verbose(sprintf('Your current local build version is: <options=bold>%s</options=bold>', $updater->getCurrentLocalVersion()));
+            $logger->verbose(sprintf('Your current local build version is: %s', $updater->getCurrentLocalVersion()));
             try {
                 $result = $updater->getCurrentRemoteVersion();
                 if ($result) {
-                    $logger->info(sprintf('The current %s build available remotely is: <options=bold>%s</options=bold>', $updater->getStability(), $result));
+                    $logger->info(sprintf('The current %s build available remotely is: %s', $updater->getStability(), $result));
                 } else {
                     $logger->info(sprintf('You have the current %s build installed.', $updater->getStability()));
                 }

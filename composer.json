@@ -46,6 +46,7 @@
         "robertsaupe/php-json": "^1",
         "robertsaupe/php-logger": "^1",
         "robertsaupe/php-phar-selfupdate": "^1",
+        "robertsaupe/php-systeminfo": "^1",
         "splitbrain/php-archive": "^1",
         "symfony/console": "^6",
         "symfony/filesystem": "^6",
