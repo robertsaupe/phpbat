@@ -18,7 +18,6 @@ use robertsaupe\phpbat\NotInstantiable;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\phpbat\Exception\NoConfigurationFound;
 use robertsaupe\Json\Json;
-use stdClass;
 
 /**
  * @internal
