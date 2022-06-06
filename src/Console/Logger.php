@@ -72,6 +72,8 @@ final class Logger extends LogFile {
             $this->writeNoOutput(sprintf('Logging->FreeSpace: %s', Info::decodeSize(Info::getFreeSpace($this->fileBasePath))));
             $this->verboseNoOutput(sprintf('Logging->UsedSpace: %s', Info::decodeSize(Info::getUsedSpace($this->fileBasePath))));
             $this->writeNoOutput(sprintf('Logging->DirectorySize: %s', Info::decodeSize(Info::getDirectorySize($this->fileBasePath))));
+            $this->verboseNoOutput(sprintf('PHP->Version: %s', Info::getEnvironment()['php']['version']));
+            $this->verboseNoOutput(sprintf('PHP->Extensions: %s', implode(', ', Info::getEnvironment()['php']['loaded_extensions'])));
     }
 
     public function error(string $message): LogMessage {

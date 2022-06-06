@@ -91,6 +91,7 @@ class Application extends BaseApplication {
                 new Command\Color(),
                 new Command\Error(),
                 new Command\Logger(),
+                new Command\Info(),
                 new Command\Configuration(),
                 new Command\ConfigurationShow(),
                 new Command\ConfigurationValidate(),

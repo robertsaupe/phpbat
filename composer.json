@@ -98,6 +98,10 @@
         "stan": "phpstan analyse -vvv",
         "console": "@php bin/phpbat",
         "console-debug": "@php bin/phpbat-debug",
-        "debug": "@php bin/phpbat-debug"
+        "debug": "@php bin/phpbat-debug",
+        "phar": "@php build/phpbat.phar",
+        "compile": "box compile",
+        "release-local": "box compile \n php .tools/release.php",
+        "release": "box compile \n php .tools/release.php \n cd ../gh-pages \n git add -A \n git commit -m \"Bump new phar release\" \n git push origin gh-pages"
     }
 }
