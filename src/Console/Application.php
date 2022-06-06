@@ -87,10 +87,6 @@ class Application extends BaseApplication {
         $commands = array_merge(
             parent::getDefaultCommands(),
             [
-                new Command\Hello(),
-                new Command\Color(),
-                new Command\Error(),
-                new Command\Logger(),
                 new Command\Info(),
                 new Command\Configuration(),
                 new Command\ConfigurationShow(),
