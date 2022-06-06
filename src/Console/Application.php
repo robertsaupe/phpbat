@@ -38,6 +38,7 @@ class Application extends BaseApplication {
     public const VERSION_PATCH = 0;
     public const VERSION_RELEASE = "alpha";//beta|b|RC|alpha|a|patch|pl|p or leave blank for stable
     public const VERSION_CORE = self::VERSION_MAJOR . '.' . self::VERSION_MINOR . '.' . self::VERSION_PATCH;
+    /** @phpstan-ignore-next-line */
     public const VERSION = self::VERSION_CORE . ((self::VERSION_RELEASE === '') ? '' : '-' . self::VERSION_RELEASE);
 
     /* Version replaced by Box */

@@ -62,7 +62,7 @@ final class Logging {
         private bool $enabled,
         private string $path,
         private string $verbosityKey,
-        private int $chmod
+        private int|float $chmod
     ) {
         
     }
@@ -79,7 +79,7 @@ final class Logging {
         return $this->verbosityKey;
     }
 
-    public function getChmod(): int {
+    public function getChmod(): int|float {
         return $this->chmod;
     }
 

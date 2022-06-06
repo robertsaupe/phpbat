@@ -74,7 +74,7 @@ final class Configuration {
         return $timezone;
     }
 
-    private static function setTimeZone($timezone): bool {
+    private static function setTimeZone(string $timezone): bool {
         if (function_exists('date_default_timezone_set') && $timezone !== '' && $timezone !== 'default') return date_default_timezone_set($timezone);
         return false;
     }

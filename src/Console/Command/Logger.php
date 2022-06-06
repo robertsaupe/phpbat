@@ -29,6 +29,7 @@ class Logger extends BasicCommandConfiguration {
         $config = $this->getConfig($io);
 
         $logger = new ConsoleLogger(
+            /** @phpstan-ignore-next-line */
             $this->getApplication(),
             $config->getLogging()->getEnabled(),
             $io,

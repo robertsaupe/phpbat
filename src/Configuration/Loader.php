@@ -18,6 +18,7 @@ use robertsaupe\phpbat\NotInstantiable;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\phpbat\Exception\NoConfigurationFound;
 use robertsaupe\Json\Json;
+use stdClass;
 
 /**
  * @internal
@@ -38,6 +39,7 @@ final class Loader {
         $configPath = self::getConfigPath($configPath, $io);
 
         try {
+            /** @phpstan-ignore-next-line */
             return self::loadFile($configPath);
         } catch (InvalidArgumentException $invalidConfig) {
             $io->error('The configuration file is invalid.');
@@ -48,7 +50,7 @@ final class Loader {
     private static function getConfigPath(
         ?string $configPath,
         IO $io,
-    ): string {
+    ): string|false {
         try {
             $configPath ??= self::findDefaultPath();
         } catch (NoConfigurationFound $noConfigurationFound) {
@@ -60,7 +62,7 @@ final class Loader {
         return $configPath;
     }
 
-    private static function findDefaultPath(): string {
+    private static function findDefaultPath(): string|false {
         if (file_exists(self::FILE_NAME)) {
             //Configuration file present in working directory
             return realpath(self::FILE_NAME);
@@ -84,9 +86,12 @@ final class Loader {
         $jsonObject = self::getJson()->decode($jsonString);
         self::getJson()->validate(
             $file,
+            /** @phpstan-ignore-next-line */
             $jsonObject,
+            /** @phpstan-ignore-next-line */
             self::getJson()->decodeFile(self::SCHEMA_FILE),
         );
+        /** @phpstan-ignore-next-line */
         return Configuration::create($file, $jsonObject, $jsonString);
     }
 

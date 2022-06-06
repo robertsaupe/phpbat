@@ -17,7 +17,7 @@ use robertsaupe\phpbat\Console\IO;
 
 class Color extends BasicCommandApp {
 
-    protected function configure()  {
+    protected function configure(): void  {
         $this->setName('color');
         $this->setDescription('Outputs some coloured messages');
     }

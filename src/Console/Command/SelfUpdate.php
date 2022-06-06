@@ -70,6 +70,7 @@ class SelfUpdate extends BasicCommandConfiguration {
         $config = $this->getConfig($io);
 
         $logger = new ConsoleLogger(
+            /** @phpstan-ignore-next-line */
             $this->getApplication(),
             $io->getInput()->getOption(self::NOLOG_OPTION) ? false : $config->getLogging()->getEnabled(),
             $io,

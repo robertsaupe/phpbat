@@ -17,7 +17,7 @@ use robertsaupe\phpbat\Console\IO;
 
 class Hello extends BasicCommandApp {
 
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('hello');
         $this->setDescription('Outputs "Hello World"');
     }

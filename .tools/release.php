@@ -26,7 +26,7 @@ define('RELEASE_MANIFEST', RELEASE_DIR . '/manifest.json');
 
 define('RELEASE_REMOTE_URL', 'https://robertsaupe.github.io/phpbat/release');
 
-function release($version = Application::VERSION) {
+function release(string $version = Application::VERSION): void {
 
     print('add/update release: ' . $version . PHP_EOL . PHP_EOL);
 
@@ -119,6 +119,7 @@ function release($version = Application::VERSION) {
 
     $jsonObjectComposer = $json->decodeFile(COMPOSER_MANIFEST, true);
     
+    /** @phpstan-ignore-next-line */
     $jsonObject[$version] = [
         "version" => Application::VERSION,
         "url" => RELEASE_REMOTE_URL . '/' . $version . '/' . FILE_NAME,
@@ -126,6 +127,7 @@ function release($version = Application::VERSION) {
         "sha256" => $release_hash_sha256,
         "sha512" => $release_hash_sha512,
         "php" => [
+            /** @phpstan-ignore-next-line */
             "min" => $jsonObjectComposer["config"]["platform"]["php"]
         ]
     ];
@@ -153,6 +155,7 @@ print(PHP_EOL.PHP_EOL);
 
 release();
 
+/** @phpstan-ignore-next-line */
 if (Application::VERSION_RELEASE === 'stable' || Application::VERSION_RELEASE === '') {
     print(PHP_EOL.PHP_EOL);
     release('latest');

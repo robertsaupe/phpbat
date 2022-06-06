@@ -37,6 +37,28 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "email": "mail@robertsaupe.de",
+        "issues": "https://github.com/robertsaupe/php-json/issues"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/robertsaupe"
+        },
+        {
+            "type": "patreon",
+            "url": "https://patreon.com/robertsaupe"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ"
+        },
+        {
+            "type": "amazon",
+            "url": "https://www.amazon.de/ref=as_li_ss_tl?ie=UTF8&linkCode=ll2&tag=robertsaupe-21&linkId=b79bc86cee906816af515980cb1db95e&language=de_DE"
+        }
+    ],
     "require": {
         "php": ">=8.0.2",
         "ext-phar": "*",
@@ -55,6 +77,9 @@
         "symfony/var-dumper": "^6",
         "webmozart/assert": "^1"
     },
+    "require-dev": {
+        "phpstan/phpstan": "^1"
+    },
     "autoload": {
         "psr-4": { 
             "robertsaupe\\phpbat\\": "src/"
@@ -68,5 +93,11 @@
         "platform-check": false,
         "sort-packages": true
     },
-    "bin": ["bin/phpbat"]
+    "bin": ["bin/phpbat"],
+    "scripts": {
+        "stan": "phpstan analyse -vvv",
+        "console": "@php bin/phpbat",
+        "console-debug": "@php bin/phpbat-debug",
+        "debug": "@php bin/phpbat-debug"
+    }
 }

@@ -37,7 +37,7 @@ final class Logger extends LogFile {
         protected IO $io,
         protected string $fileBasePath,
         protected string $fileBaseName,
-        protected int $chmod = 0600,
+        protected int|float $chmod = 0600,
         protected string $fileExtension = self::DEFAULT_FILE_EXTENSION,
         protected string $fileDateFormat = self::DEFAULT_FILE_DATE_FORMAT,
         protected string $verbosityKey = self::VERBOSITY_KEY_NORMAL,

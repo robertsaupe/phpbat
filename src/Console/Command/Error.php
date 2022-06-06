@@ -18,13 +18,14 @@ use robertsaupe\phpbat\Console\IO;
 
 class Error extends BasicCommandApp {
 
-    protected function configure() {
+    protected function configure(): void {
         $this->setName('error');
         $this->setDescription('Outputs an Error');
     }
 
     public function executeCommand(IO $io):int {
         try {
+            /** @phpstan-ignore-next-line */
             $var = 5 / 0;
             $io->writeln('$var: ' . $var);
         } catch (Throwable $throwable) {

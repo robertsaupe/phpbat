@@ -42,8 +42,7 @@ class ConfigurationValidate extends BasicCommandConfiguration {
                     $io->writeln("<comment>  - $error</comment>");
                 }
             } else {
-                $errorMessage = isset($exception) ? sprintf('The configuration file failed validation: %s', $exception->getMessage()) : 'The configuration file failed validation.';
-                $io->error(sprintf('%s', $errorMessage));
+                $io->error(sprintf('The configuration file failed validation: %s', $exception->getMessage()));
             }
         }
 
