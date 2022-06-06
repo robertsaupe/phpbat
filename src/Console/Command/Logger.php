@@ -13,15 +13,24 @@ declare(strict_types=1);
 
 namespace robertsaupe\phpbat\Console\Command;
 
+use Symfony\Component\Console\Input\InputOption;
 use robertsaupe\phpbat\Console\IO;
 use robertsaupe\phpbat\Console\Logger as ConsoleLogger;
 
 class Logger extends BasicCommandConfiguration {
 
+    private const NOLOG_OPTION = 'no-log';
+
     protected function configure(): void {
         parent::configure();
         $this->setName('logger');
         $this->setDescription('Test the logger');
+        $this->addOption(
+            self::NOLOG_OPTION,
+            null,
+            InputOption::VALUE_NONE,
+            'Disable logging for this update'
+        );
     }
 
     public function executeCommand(IO $io):int {
@@ -31,7 +40,7 @@ class Logger extends BasicCommandConfiguration {
         $logger = new ConsoleLogger(
             /** @phpstan-ignore-next-line */
             $this->getApplication(),
-            $config->getLogging()->getEnabled(),
+            $io->getInput()->getOption(self::NOLOG_OPTION) ? false : $config->getLogging()->getEnabled(),
             $io,
             $config->getLogging()->getPath(),
             'test',
