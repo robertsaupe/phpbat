@@ -6,3 +6,5 @@
 /bin/jsonlint
 /bin/validate-json
 /bin/var-dump-server
+/bin/phpstan
+/bin/phpstan.phar
