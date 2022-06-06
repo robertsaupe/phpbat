@@ -9,6 +9,7 @@
             "type": "string"
         },
         "logging": {
+            "additionalProperties": false,
             "description": "configures logger",
             "type": "object",
             "properties": {
@@ -16,17 +17,29 @@
                     "type": "boolean",
                     "description": "Write to file enabled? (default: true)"
                 },
-                "path": {
-                    "type": "string",
-                    "description": "Path where the files are saved. (default: logs)"
-                },
                 "verbosity": {
                     "type": "string",
                     "description": "Verbosity of the logger (default: normal) [error, warning, info, normal, verbose, veryverbose, debug]"
                 },
+                "dateFormat": {
+                    "type": "string",
+                    "description": "Date format in logs (default: c)"
+                },
+                "messageFormat": {
+                    "type": "string",
+                    "description": "Message format in logs (default: \"(%s)\t[%s]: \t%s\n\")"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Path where the files are saved. (default: logs)"
+                },
+                "fileDateFormat": {
+                    "type": "string",
+                    "description": "Date format used for log files (default: Y-m-d_H-i-s)"
+                },
                 "chmod": {
                     "type": "string",
-                    "description": "The chmod used for the files. (default: 0600)"
+                    "description": "The chmod used for the log files. (default: 0600)"
                 }
             }
         }

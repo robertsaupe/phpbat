@@ -71,13 +71,16 @@ class SelfUpdate extends BasicCommandConfiguration {
 
         $logger = new ConsoleLogger(
             /** @phpstan-ignore-next-line */
-            $this->getApplication(),
-            $io->getInput()->getOption(self::NOLOG_OPTION) ? false : $config->getLogging()->getEnabled(),
-            $io,
-            $config->getLogging()->getPath(),
-            'update',
-            $config->getLogging()->getChmod(),
-            verbosityKey:$config->getLogging()->getVerbosityKey()
+            application: $this->getApplication(),
+            io: $io,
+            isWriteToFileEnabled: $io->getInput()->getOption(self::NOLOG_OPTION) ? false : $config->getLogging()->getEnabled(),
+            verbosityKey: $config->getLogging()->getVerbosityKey(),
+            dateFormat: $config->getLogging()->getDateFormat(),
+            messageFormat: $config->getLogging()->getMessageFormat(),
+            fileBasePath: $config->getLogging()->getPath(),
+            fileBaseName: 'update',
+            fileDateFormat: $config->getLogging()->getFileDateFormat(),
+            chmod: $config->getLogging()->getChmod()
         );
 
         $logger->verbose('SelfUpdate started');

@@ -33,11 +33,11 @@ final class Logger extends LogFile {
 
     public function __construct(
         protected Application $application,
-        protected bool $isWriteToFileEnabled,
         protected IO $io,
-        protected string $fileBasePath,
-        protected string $fileBaseName,
-        protected int|float $chmod = 0600,
+        protected bool $isWriteToFileEnabled = true,
+        protected string $fileBasePath = self::DEFAULT_FILE_BASE_PATH,
+        protected string $fileBaseName = self::DEFAULT_FILE_BASE_NAME,
+        protected int|float $chmod = self::DEFAULT_CHMOD,
         protected string $fileExtension = self::DEFAULT_FILE_EXTENSION,
         protected string $fileDateFormat = self::DEFAULT_FILE_DATE_FORMAT,
         protected string $verbosityKey = self::VERBOSITY_KEY_NORMAL,
