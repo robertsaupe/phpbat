@@ -54,6 +54,7 @@ final class Logger extends LogFile {
                 $this->dateFormat,
                 $this->messageFormat
             );
+            $this->io->info('Logger created at: ' . $this->filePath);
             $this->infoNoOutput(sprintf('%s version %s %s', $this->application->getName(), $this->application->getVersion(), $this->application->getVersionBuild()));
             $this->infoNoOutput(sprintf('HostName: %s', OS::getHostName()));
             if (OS::getType() == 'Linux') {

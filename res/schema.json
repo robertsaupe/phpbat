@@ -4,6 +4,9 @@
     "type": "object",
     "additionalProperties": false,
     "properties":{
+        "$schema": {
+            "type": "string"
+        },
         "timezone": {
             "description": "Sets the default timezone",
             "type": "string"
@@ -16,6 +19,10 @@
                 "enabled": {
                     "type": "boolean",
                     "description": "Write to file enabled? (default: true)"
+                },
+                "sendMail": {
+                    "type": "boolean",
+                    "description": "Send mail enabled? (default: false)"
                 },
                 "verbosity": {
                     "type": "string",
@@ -40,6 +47,50 @@
                 "chmod": {
                     "type": "string",
                     "description": "The chmod used for the log files. (default: 0600)"
+                }
+            }
+        },
+        "mail": {
+            "additionalProperties": false,
+            "description": "configures email",
+            "type": "object",
+            "required": [
+                "host",
+                "user",
+                "password",
+                "ssl",
+                "port",
+                "from",
+                "to"
+            ],
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "description": "smtp server"
+                },
+                "user": {
+                    "type": "string",
+                    "description": "smtp username"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "smtp password"
+                },
+                "ssl": {
+                    "type": "boolean",
+                    "description": "true: ssl, false: tls"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "ssl: 465, tls: 587"
+                },
+                "from": {
+                    "type": "string",
+                    "description": "send from this address"
+                },
+                "to": {
+                    "type": "string",
+                    "description": "send to this address"
                 }
             }
         }

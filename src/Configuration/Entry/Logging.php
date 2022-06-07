@@ -16,7 +16,7 @@ namespace robertsaupe\phpbat\Configuration\Entry;
 use stdClass;
 use InvalidArgumentException;
 use Webmozart\Assert\Assert;
-use robertsaupe\phpbat\Console\Logger as ConsoleLogger;
+use robertsaupe\phpbat\Console\Logger;
 
 /**
  * @internal
@@ -33,19 +33,23 @@ final class Logging {
         $objectEnabled = (isset($object->{$keyEnabled}) ? $object->{$keyEnabled} : true);
         Assert::boolean($objectEnabled, 'Must be a boolean ' .$key . '.' . $keyEnabled);
 
+        $keySendMail = 'sendMail';
+        $objectSendMail = (isset($object->{$keySendMail}) ? $object->{$keySendMail} : false);
+        Assert::boolean($objectSendMail, 'Must be a boolean ' .$key . '.' . $keySendMail);
+
         $keyVerbosity = 'verbosity';
-        $objectVerbosity = (isset($object->{$keyVerbosity}) ? $object->{$keyVerbosity} : ConsoleLogger::VERBOSITY_KEY_NORMAL);
+        $objectVerbosity = (isset($object->{$keyVerbosity}) ? $object->{$keyVerbosity} : Logger::VERBOSITY_KEY_NORMAL);
         Assert::string($objectVerbosity, 'Must be a string ' . $key . '.' . $keyVerbosity);
-        if (!ConsoleLogger::isVerbosityKeyValid($objectVerbosity)) throw new InvalidArgumentException('Must be a valid string ' . $key . '.' . $keyVerbosity);
+        if (!Logger::isVerbosityKeyValid($objectVerbosity)) throw new InvalidArgumentException('Must be a valid string ' . $key . '.' . $keyVerbosity);
 
         $keyDateFormat = 'dateFormat';
-        $objectDateFormat = (isset($object->{$keyDateFormat}) ? $object->{$keyDateFormat} : ConsoleLogger::DEFAULT_DATE_FORMAT);
+        $objectDateFormat = (isset($object->{$keyDateFormat}) ? $object->{$keyDateFormat} : Logger::DEFAULT_DATE_FORMAT);
         Assert::string($objectDateFormat, 'Must be a string ' . $key . '.' . $keyDateFormat);
         $objectDateFormat = trim($objectDateFormat);
         Assert::notEmpty($objectDateFormat, 'Cannot be empty ' . $key . '.' . $keyDateFormat);
 
         $keyMessageFormat = 'messageFormat';
-        $objectMessageFormat = (isset($object->{$keyMessageFormat}) ? $object->{$keyMessageFormat} : ConsoleLogger::DEFAULT_MESSAGE_FORMAT);
+        $objectMessageFormat = (isset($object->{$keyMessageFormat}) ? $object->{$keyMessageFormat} : Logger::DEFAULT_MESSAGE_FORMAT);
         Assert::string($objectMessageFormat, 'Must be a string ' . $key . '.' . $keyMessageFormat);
         Assert::notEmpty($objectMessageFormat, 'Cannot be empty ' . $key . '.' . $keyMessageFormat);
 
@@ -56,7 +60,7 @@ final class Logging {
         Assert::notEmpty($objectPath, 'Cannot be empty ' . $key . '.' . $keyPath);
 
         $keyFileDateFormat = 'fileDateFormat';
-        $objectFileDateFormat = (isset($object->{$keyFileDateFormat}) ? $object->{$keyFileDateFormat} : ConsoleLogger::DEFAULT_FILE_DATE_FORMAT);
+        $objectFileDateFormat = (isset($object->{$keyFileDateFormat}) ? $object->{$keyFileDateFormat} : Logger::DEFAULT_FILE_DATE_FORMAT);
         Assert::string($objectFileDateFormat, 'Must be a string ' . $key . '.' . $keyFileDateFormat);
         $keyFileDateFormat = trim($objectFileDateFormat);
         Assert::notEmpty($objectFileDateFormat, 'Cannot be empty ' . $key . '.' . $keyFileDateFormat);
@@ -69,6 +73,7 @@ final class Logging {
 
         return new self(
             $objectEnabled,
+            $objectSendMail,
             $objectVerbosity,
             $objectDateFormat,
             $objectMessageFormat,
@@ -80,6 +85,7 @@ final class Logging {
 
     private function __construct(
         private bool $enabled,
+        private bool $sendMail,
         private string $verbosityKey,
         private string $dateFormat,
         private string $messageFormat,
@@ -92,6 +98,10 @@ final class Logging {
 
     public function getEnabled(): bool {
         return $this->enabled;
+    }
+
+    public function getSendMail(): bool {
+        return $this->sendMail;
     }
 
     public function getVerbosityKey(): string {
