@@ -1,10 +1,9 @@
 /composer.lock
 /vendor/
-/phpbat.json
 /build/
 /logs/
-/bin/jsonlint
-/bin/validate-json
-/bin/var-dump-server
-/bin/phpstan
-/bin/phpstan.phar
+/phpbat.json
+/phpbat.dev.json
+/bin/*
+!/bin/phpbat
+!/bin/phpbat-debug

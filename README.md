@@ -1,31 +1,21 @@
+# phpBAT - a PHP based Backup &amp; Admin Tool
+
+![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.logo/phpbat-banner.png)
+
 <h1>
 
 ```diff
-<<<<<<< HEAD
 -! WORK IN PROGRESS !-
 
-!- The development of the phar version is at a very early stage.
+!- The development of the version 3 (phar) is at a very early stage.
 !- Neither tests nor feedback are currently useful.
 !- As soon as the situation changes, I will inform you.
 
-#=- ... -=#
-
+The specifications for version 3 are still in the concept phase.
+Below you will find the readme for the old version 2.
 ```
 
-=======
--! Phar Version - WORK IN PROGRESS !-
-```
-
-[More ...](https://github.com/robertsaupe/phpbat/tree/phar)
-
->>>>>>> master
 </h1>
-
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/phar/.logo/phpbat-banner.png)
-
-# phpBAT - a PHP based Backup &amp; Admin Tool
 
 [Supporting](https://github.com/robertsaupe/phpbat#supporting) |
 [Features](https://github.com/robertsaupe/phpbat#features) |
