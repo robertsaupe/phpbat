@@ -1,0 +1,51 @@
+{
+    "banner": [
+        "This file is part of the robertsaupe/phpbat package.",
+        "",
+        "(c) Robert Saupe <mail@robertsaupe.de>",
+        "",
+        "This source file is subject to the MIT license that is bundled",
+        "with this source code in the file LICENSE."
+    ],
+
+    "chmod": "0755",
+
+    "finder": [
+        {
+            "notName": "/LICENSE|.*\\.md|.*\\.dist|Makefile|composer\\.json|composer\\.lock/",
+            "exclude": [
+                "doc",
+                "test",
+                "test_old",
+                "tests",
+                "Tests",
+                "vendor-bin"
+            ],
+            "in": "vendor"
+        }
+    ],
+
+    "directories": ["bin", "src", "res"],
+
+    "files": [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
+
+    "compression": "GZ",
+
+    "compactors": [
+        "KevinGH\\Box\\Compactor\\Php"
+    ],
+
+    "datetime": "release-date",
+    "git": "git",
+    "git-commit": "git.commit",
+    "git-commit-short": "git.commit.short",
+    "git-tag": "git.tag",
+    "git-version": "git.version",
+
+    "main": "bin/phpbat",
+    "output": "build/phpbat.phar"
+}

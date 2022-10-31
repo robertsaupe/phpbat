@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Settings used to backup and administrate a server or webspace using phpBAT.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties":{
+        "$schema": {
+            "type": "string"
+        },
+        "timezone": {
+            "description": "Sets the default timezone",
+            "type": "string"
+        },
+        "logging": {
+            "additionalProperties": false,
+            "description": "configures logger",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Write to file enabled? (default: true)"
+                },
+                "sendMail": {
+                    "type": "boolean",
+                    "description": "Send mail enabled? (default: false)"
+                },
+                "verbosity": {
+                    "type": "string",
+                    "description": "Verbosity of the logger (default: normal) [error, warning, info, normal, verbose, veryverbose, debug]"
+                },
+                "dateFormat": {
+                    "type": "string",
+                    "description": "Date format in logs (default: c)"
+                },
+                "messageFormat": {
+                    "type": "string",
+                    "description": "Message format in logs (default: \"(%s)\t[%s]: \t%s\n\")"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Path where the files are saved. (default: logs)"
+                },
+                "fileDateFormat": {
+                    "type": "string",
+                    "description": "Date format used for log files (default: Y-m-d_H-i-s)"
+                },
+                "chmod": {
+                    "type": "string",
+                    "description": "The chmod used for the log files. (default: 0600)"
+                }
+            }
+        },
+        "mail": {
+            "additionalProperties": false,
+            "description": "configures email",
+            "type": "object",
+            "required": [
+                "host",
+                "user",
+                "password",
+                "ssl",
+                "port",
+                "from",
+                "to"
+            ],
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "description": "smtp server"
+                },
+                "user": {
+                    "type": "string",
+                    "description": "smtp username"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "smtp password"
+                },
+                "ssl": {
+                    "type": "boolean",
+                    "description": "true: ssl, false: tls"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "ssl: 465, tls: 587"
+                },
+                "from": {
+                    "type": "string",
+                    "description": "send from this address"
+                },
+                "to": {
+                    "type": "string",
+                    "description": "send to this address"
+                }
+            }
+        }
+    }
+}

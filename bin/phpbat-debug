@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+//declare(strict_types=1);
+
+/*
+ * This file is part of the robertsaupe/phpbat package.
+ *
+ * (c) Robert Saupe <mail@robertsaupe.de>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+define("APP_DEBUG", true);
+
+require __DIR__ . '/phpbat';
+?>

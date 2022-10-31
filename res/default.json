@@ -1,0 +1,23 @@
+{
+    "$schema": "./schema.json",
+    "timezone": "default",
+    "logging": {
+        "enabled": true,
+        "sendMail": false,
+        "verbosity": "normal",
+        "dateFormat": "c",
+        "messageFormat": "(%s)\t[%s]: \t%s\n",
+        "path": "logs",
+        "fileDateFormat": "Y-m-d_H-i-s",
+        "chmod": "0600"
+    },
+    "mail": {
+        "host": "smtp.example.com",
+        "user": "noreply@example.com",
+        "password": "password",
+        "ssl": true,
+        "port": 465,
+        "from": "noreply@example.com",
+        "to": "mail@example.com"
+    }
+}

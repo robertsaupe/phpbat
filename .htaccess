@@ -1,6 +1,0 @@
-Options -Indexes
-
-<Files Configuration.jsonc>
-Order deny,allow
-Deny from all
-</Files>

@@ -1,11 +1,24 @@
 <h1>
 
 ```diff
+<<<<<<< HEAD
+-! WORK IN PROGRESS !-
+
+!- The development of the phar version is at a very early stage.
+!- Neither tests nor feedback are currently useful.
+!- As soon as the situation changes, I will inform you.
+
+#=- ... -=#
+
+```
+
+=======
 -! Phar Version - WORK IN PROGRESS !-
 ```
 
 [More ...](https://github.com/robertsaupe/phpbat/tree/phar)
 
+>>>>>>> master
 </h1>
 
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

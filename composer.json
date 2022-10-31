@@ -1,0 +1,107 @@
+{
+    "name": "robertsaupe/phpbat",
+    "description": "a PHP based Backup & Admin Tool",
+    "keywords": [
+        "phar",
+        "php",
+        "php8",
+        "php-cli",
+        "cli",
+        "command-line",
+        "console-application",
+        "archive",
+        "tar",
+        "gz",
+        "backup",
+        "backups",
+        "encrypted-backups",
+        "encryption",
+        "update",
+        "upgrade",
+        "clear",
+        "log",
+        "rsync",
+        "ftp",
+        "ftps",
+        "sftp",
+        "mysqldump"
+    ],
+    "homepage": "https://github.com/robertsaupe/phpbat",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Saupe",
+            "email": "mail@robertsaupe.de",
+            "homepage": "https://robertsaupe.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "mail@robertsaupe.de",
+        "issues": "https://github.com/robertsaupe/phpbat/issues"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/robertsaupe"
+        },
+        {
+            "type": "patreon",
+            "url": "https://patreon.com/robertsaupe"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/donate?hosted_button_id=SQMRNY8YVPCZQ"
+        },
+        {
+            "type": "amazon",
+            "url": "https://www.amazon.de/ref=as_li_ss_tl?ie=UTF8&linkCode=ll2&tag=robertsaupe-21&linkId=b79bc86cee906816af515980cb1db95e&language=de_DE"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.2",
+        "ext-phar": "*",
+        "ifsnop/mysqldump-php": "^2",
+        "phpmailer/phpmailer": "^6",
+        "phpseclib/phpseclib": "^3",
+        "robertsaupe/php-json": "^1",
+        "robertsaupe/php-logger": "^1",
+        "robertsaupe/php-phar-selfupdate": "^1",
+        "robertsaupe/php-systeminfo": "^1",
+        "splitbrain/php-archive": "^1",
+        "symfony/console": "^6",
+        "symfony/filesystem": "^6",
+        "symfony/finder": "^6",
+        "symfony/process": "^6",
+        "symfony/var-dumper": "^6",
+        "webmozart/assert": "^1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1"
+    },
+    "autoload": {
+        "psr-4": { 
+            "robertsaupe\\phpbat\\": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "platform": {
+            "php": "8.0.2"
+        },
+        "platform-check": false,
+        "sort-packages": true
+    },
+    "bin": ["bin/phpbat"],
+    "scripts": {
+        "stan": "phpstan analyse -vvv",
+        "console": "@php bin/phpbat",
+        "console-debug": "@php bin/phpbat-debug",
+        "debug": "@php bin/phpbat-debug",
+        "phar": "@php build/phpbat.phar",
+        "compile": "box compile",
+        "release-local": "box compile \n php .tools/release.php",
+        "release": "box compile \n php .tools/release.php \n cd ../gh-pages \n git add -A \n git commit -m \"Bump new phar release\" \n git push origin gh-pages"
+    }
+}
