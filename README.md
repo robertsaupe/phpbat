@@ -1,5 +1,10 @@
 # phpBAT - a PHP based Backup &amp; Admin Tool
 
+[![Minimum PHP version: 8.2.0](https://img.shields.io/badge/php-8.2%2B-blue.svg?color=blue&style=for-the-badge)](https://packagist.org/packages/robertsaupe/phpbat)
+[![Packagist Version](https://img.shields.io/packagist/v/robertsaupe/phpbat?color=blue&style=for-the-badge)](https://packagist.org/packages/robertsaupe/phpbat)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/robertsaupe/phpbat?color=blue&style=for-the-badge)](https://packagist.org/packages/robertsaupe/phpbat)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
 ![phpBAT](https://raw.githubusercontent.com/robertsaupe/phpbat/master/.logo/phpbat-banner.png)
 
 <h1>
